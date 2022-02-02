@@ -32,8 +32,22 @@ function UpdateHidden(checkbox, todoId) {
         </li>
       {% endfor %}
       </ul>
-      <button>Actualizar</button>
+      <button type="submit">Actualizar</button>
     </form>
+    Todos:
+    <ul>
+      {% for todo in todos %}
+      <li>
+        <span>{{ todo.title }}</span>
+        <form method="post" action="/todo/delete_post/">
+          {% csrf_token %}
+          <input name="prueba" type="hidden" value="{{ todo.id }}">
+          <button type="submit">Eliminar</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+
   {% else %}
     Sin TODOs
   {% endif %}

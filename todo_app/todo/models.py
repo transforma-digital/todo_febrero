@@ -4,3 +4,6 @@ class Todo(models.Model):
     title = models.CharField(max_length=128)
     created = models.DateTimeField()
     checked = models.BooleanField()
+
+    def __str__(self):
+        return self.title

@@ -75,6 +75,10 @@ def TodoDeleteView(request, todo_id):
     todo.delete()
     return redirect('/todo/single/')
 
+def TodoDeleteViewPost(request):
+    print(request.POST)
+    return redirect('/todo/single/')
+
 
 def TodoUpdateChecks(request):
     pairs = request.POST.getlist('todo_check')
