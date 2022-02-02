@@ -1,0 +1,11 @@
+<html>
+<body>
+  <a href="{% url 'todo:new' %}">New</a>
+  <hr>
+  <ul>
+  {% for todo in todos %}
+    <li>{{ todo.title }} </li>
+  {% endfor %}
+  </ul>
+</body>
+</html>

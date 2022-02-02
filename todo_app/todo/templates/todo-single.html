@@ -1,0 +1,48 @@
+<html>
+<head>
+<style>
+.delete-link {
+  color: red;
+  cursor: pointer;
+  text-decoration: none;
+}
+</style>
+<script>
+
+function UpdateHidden(checkbox, todoId) {
+  let hidden_input = checkbox.nextElementSibling;
+  let text = checkbox.checked ? 'True' : 'False';
+  hidden_input.value = `${todoId}:${text}`;
+}
+
+</script> 
+</head>
+<body>
+  {% if todos %}
+    <form method="post" action="/todo/update_checks/">
+      {% csrf_token %}
+      Todos:
+      <ul>
+      {% for todo in todos %}
+        <li>
+          <input type="checkbox" id="check" onchange="UpdateHidden(this, '{{ todo.id }}')" {% if todo.checked %} checked{% endif %}>
+          <input type="hidden" name="todo_check" value="{{ todo.id }}:{{ todo.checked }}">
+          <span>{{ todo.title }}</span>
+          <a class="delete-link" href="{% url 'todo:delete_get' todo.id %}">X</a>
+        </li>
+      {% endfor %}
+      </ul>
+      <button>Actualizar</button>
+    </form>
+  {% else %}
+    Sin TODOs
+  {% endif %}
+  <hr>
+  Agregar
+  <form method="post" action="{% url 'todo:single' %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+  </form>
+</body>
+</html>
